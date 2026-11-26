@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MiToSoft – Un mondo più pulito</title>
+<meta name="description" content="MiToSoft: software e automazione per impianti di biogas da oltre 20 anni. Puliamo il mondo, un digestore alla volta.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐄</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ec; --surface:#ffffff; --ink:#1b2419; --muted:#5d6858;
+  --green:#2f7d32; --green-dark:#1d4f20; --lime:#c6e94b; --brown:#7a4e2d;
+  --line:#e2dfd2; --shadow:0 10px 30px rgba(27,36,25,.08);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:16px;top:16px;background:var(--lime);padding:8px 12px;z-index:99}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(246,244,236,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:"Bricolage Grotesque";font-weight:800;font-size:22px}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:var(--green);display:grid;place-items:center;font-size:22px;transform:rotate(-6deg);transition:transform .3s}
+.logo:hover .logo-mark{transform:rotate(354deg)}
+.logo b{color:var(--green)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--green)}
+.menu-btn{display:none;background:none;border:0;font-size:26px;cursor:pointer}
+
+/* hero */
+.hero{position:relative;padding:90px 0 70px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(198,233,75,.45),transparent 45%),radial-gradient(circle at 10% 90%,rgba(47,125,50,.15),transparent 40%);z-index:-1}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.eyebrow{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--lime);padding:6px 12px;border-radius:999px}
+.hero h1{font-size:clamp(42px,7vw,84px);margin:20px 0 10px;letter-spacing:-.02em}
+.hero h1 span{color:var(--green)}
+.hero .slogan{font-size:clamp(20px,2.6vw,28px);font-family:"Bricolage Grotesque";font-weight:700;color:var(--brown);margin:0 0 18px}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:560px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink);transition:transform .15s,box-shadow .15s;cursor:pointer;font-size:16px;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:4px 4px 0 var(--ink)}
+.btn-primary{background:var(--lime);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:6px 12px;border:1px solid var(--line);background:var(--surface);border-radius:999px}
+
+/* digester art */
+.digester{position:relative;aspect-ratio:1;max-width:420px;margin:0 auto;width:100%}
+.dome{position:absolute;left:8%;right:8%;bottom:18%;height:55%;background:linear-gradient(180deg,#3f9a43,#1d4f20);border-radius:50% 50% 8px 8px/70% 70% 8px 8px;box-shadow:inset -20px -10px 0 rgba(0,0,0,.12);animation:breathe 4s ease-in-out infinite;transform-origin:bottom}
+@keyframes breathe{50%{transform:scaleY(1.06) scaleX(1.02)}}
+.dome::after{content:"MiToSoft";position:absolute;top:40%;left:0;right:0;text-align:center;color:rgba(255,255,255,.85);font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(18px,3vw,28px);letter-spacing:.04em}
+.base{position:absolute;left:4%;right:4%;bottom:12%;height:8%;background:#8b8f86;border-radius:6px}
+.ground{position:absolute;left:0;right:0;bottom:0;height:12%;background:repeating-linear-gradient(90deg,#7a4e2d 0 20px,#6c4426 20px 40px);border-radius:10px}
+.bubble{position:absolute;bottom:70%;font-size:26px;animation:rise 5s linear infinite;opacity:0}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-220px) scale(1.2);opacity:0}}
+.cow{position:absolute;bottom:10%;left:-4%;font-size:64px;cursor:pointer;user-select:none;transition:transform .2s;z-index:2}
+.cow:hover{transform:scale(1.1) rotate(-8deg)}
+.speech{position:absolute;bottom:32%;left:-2%;background:var(--surface);border:2px solid var(--ink);padding:6px 10px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none;z-index:3;white-space:nowrap}
+.speech.show{opacity:1;transform:none}
+
+/* trust */
+.trust{background:var(--ink);color:#e9eee3}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:26px 20px}
+.trust div{display:flex;gap:12px;align-items:center;font-size:15px}
+.trust .ico{font-size:28px}
+.trust strong{display:block;color:var(--lime);font-family:"Bricolage Grotesque";font-size:17px}
+
+/* sections */
+section{padding:90px 0}
+.sec-head{margin-bottom:44px;max-width:720px}
+.sec-head h2{font-size:clamp(32px,4.5vw,50px);position:relative;padding-bottom:16px}
+.sec-head h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:6px;border-radius:3px;background:var(--lime)}
+.sec-head p{color:var(--muted);font-size:18px;margin:16px 0 0}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);transition:transform .2s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.card .num{font-family:"JetBrains Mono";font-size:13px;color:var(--green);font-weight:500}
+.card .emo{font-size:44px;display:block;margin:12px 0}
+.card h3{font-size:23px;margin-bottom:10px}
+.card p{color:var(--muted);margin:0}
+.card.cta{background:var(--green);color:#fff;border-color:var(--green-dark)}
+.card.cta p{color:#d9ecd4}
+.card.cta .num{color:var(--lime)}
+.card.cta .btn{margin-top:18px;border-color:#fff;color:var(--ink)}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.terminal{background:#10160f;color:#b7e07a;font-family:"JetBrains Mono",monospace;font-size:14px;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);min-height:300px}
+.terminal .bar{display:flex;gap:6px;margin-bottom:14px}
+.terminal .bar i{width:12px;height:12px;border-radius:50%;background:#ff5f56}
+.terminal .bar i:nth-child(2){background:#ffbd2e}.terminal .bar i:nth-child(3){background:#27c93f}
+.terminal pre{margin:0;white-space:pre-wrap;word-break:break-word}
+.ticks{list-style:none;padding:0;margin:22px 0 0}
+.ticks li{padding:10px 0 10px 36px;position:relative;border-bottom:1px dashed var(--line)}
+.ticks li::before{content:"✔";position:absolute;left:0;top:9px;width:24px;height:24px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:13px}
+
+/* meter */
+.meter{background:var(--surface);border:2px solid var(--ink);border-radius:var(--radius);padding:30px;text-align:center;box-shadow:6px 6px 0 var(--ink)}
+.meter .val{font-family:"JetBrains Mono";font-size:clamp(34px,6vw,58px);color:var(--green);font-weight:500}
+.meter small{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.stat{background:var(--bg);border-radius:12px;padding:14px}
+.stat b{display:block;font-family:"Bricolage Grotesque";font-size:28px}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.step{border-top:4px solid var(--ink);padding-top:18px}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:"JetBrains Mono";color:var(--green);font-size:14px}
+.step h3{font-size:21px;margin:8px 0}
+.step p{color:var(--muted);margin:0}
+
+/* reviews */
+.reviews{background:var(--green-dark);color:#fff}
+.reviews .sec-head p{color:#c8dcc3}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{background:#fff;color:var(--ink);border-radius:var(--radius);padding:30px 26px 24px;position:relative;transform:rotate(var(--r,0deg));transition:transform .2s;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.quote:hover{transform:rotate(0) scale(1.03)}
+.quote::before{content:"“";position:absolute;top:-30px;left:18px;font-size:110px;font-family:Georgia,serif;color:var(--lime);line-height:1}
+.quote blockquote{margin:0;font-family:"Bricolage Grotesque";font-size:22px;font-weight:700;line-height:1.25}
+.quote .stars{color:#e5a50a;margin:14px 0 6px;letter-spacing:2px}
+.quote .who{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.quote .av{width:38px;height:38px;border-radius:50%;background:#222;display:grid;place-items:center;font-size:18px}
+.disclaimer{margin-top:30px;font-size:13px;color:#a9c3a3;text-align:center}
+
+/* certs */
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tag{border:2px dashed var(--green);color:var(--green-dark);padding:8px 14px;border-radius:10px;font-weight:600;background:var(--surface)}
+
+/* contact */
+.final{background:var(--lime);text-align:center;border-radius:28px;padding:60px 24px;margin:0 20px}
+.final h2{font-size:clamp(30px,5vw,54px)}
+.final p{font-size:18px;max-width:600px;margin:14px auto 26px}
+.final .btn{background:var(--ink);color:#fff}
+
+footer{padding:50px 0 30px;color:var(--muted);font-size:14px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;border-top:1px solid var(--line);padding-top:30px}
+footer h4{margin:0 0 10px;color:var(--ink);font-family:"Bricolage Grotesque"}
+footer p{margin:4px 0}
+.legal{margin-top:30px;font-size:12px;text-align:center}
+
+/* toast + floaties */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:500;transition:transform .3s;z-index:100;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.floaty{position:fixed;pointer-events:none;font-size:28px;z-index:90;animation:floatUp 1.4s ease-out forwards}
+@keyframes floatUp{to{transform:translateY(-140px) rotate(40deg);opacity:0}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  .hero-grid,.split{grid-template-columns:1fr}
+  .cards,.quotes{grid-template-columns:1fr 1fr}
+  .steps,.trust .wrap{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  nav ul{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px 20px;border-bottom:1px solid var(--line);gap:14px}
+  nav ul.open{display:flex}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .cards,.quotes,.steps,.trust .wrap,.stats{grid-template-columns:1fr}
+  section{padding:64px 0}
+  .hero{padding:50px 0}
+  .final{margin:0 16px}
+  .quote{--r:0deg!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Salta al contenuto</a>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="logo-mark">🐄</span><span>MiTo<b>Soft</b></span></a>
+    <nav aria-label="Principale">
+      <button class="menu-btn" aria-label="Apri menu" aria-expanded="false">☰</button>
+      <ul>
+        <li><a href="#servizi">Servizi</a></li>
+        <li><a href="#metodo">Metodo</a></li>
+        <li><a href="#recensioni">Cosa pensano di me</a></li>
+        <li><a href="#certificazioni">Certificazioni</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">⚡ Software · Automazione · Letame</span>
+      <h1>MiTo<span>Soft</span><br>Un mondo più pulito</h1>
+      <p class="slogan">Puliamo il mondo da oltre 20 anni.</p>
+      <p class="lead">Programmatore a partita IVA (purtroppo), specializzato in impianti di biogas. Trasformo cacca di mucca in megawatt e righe di codice in fatture. Da più di vent'anni. Senza ferie.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#servizi">Scopri cosa faccio →</a>
+        <a class="btn btn-ghost" href="#contatti">Chiamami (se c'è campo)</a>
+      </div>
+      <div class="chips">
+        <span class="chip">🧠 PLC</span><span class="chip">📟 SCADA</span><span class="chip">📡 Telecontrollo</span><span class="chip">🐄 Relazioni bovine</span><span class="chip">☕ Caffè alle 5:00</span>
+      </div>
+    </div>
+    <div class="digester" aria-hidden="true">
+      <div class="ground"></div><div class="base"></div><div class="dome"></div>
+      <span class="bubble" style="left:30%;animation-delay:0s">💨</span>
+      <span class="bubble" style="left:55%;animation-delay:1.6s">⚡</span>
+      <span class="bubble" style="left:72%;animation-delay:3.2s">💨</span>
+      <span class="speech" id="speech">Muuu!</span>
+      <span class="cow" id="cow" title="Cliccami">🐄</span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div><span class="ico">🏆</span><div><strong>20+ anni</strong>di biogas, odore incluso</div></div>
+    <div><span class="ico">🧾</span><div><strong>Partita IVA</strong>attiva e dolorante</div></div>
+    <div><span class="ico">🏖️</span><div><strong>0 giorni</strong>di ferie dal 2004</div></div>
+    <div><span class="ico">🚗</span><div><strong>Tutta Italia</strong>in Panda 4x4</div></div>
+  </div>
+</div>
+
+<section id="servizi">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Cosa faccio (oltre a lamentarmi)</h2>
+      <p>Dal digestore al cruscotto, tutto quello che serve perché l'impianto giri e il cliente non mi chiami a mezzanotte. Spoiler: chiama lo stesso.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal"><span class="num">01</span><span class="emo">🧠</span><h3>Software PLC</h3><p>Logiche per digestori, agitatori, pompe e cogeneratori. Commentate, quasi sempre. In italiano, a volte in dialetto.</p></article>
+      <article class="card reveal"><span class="num">02</span><span class="emo">📊</span><h3>SCADA e supervisione</h3><p>Grafici bellissimi della produzione di metano. Così il cliente vede in tempo reale quanto guadagna e quanto poco mi paga.</p></article>
+      <article class="card reveal"><span class="num">03</span><span class="emo">📡</span><h3>Telecontrollo</h3><p>Risolvo i problemi da remoto, dal divano, in pigiama. Il cliente pensa che io sia in macchina da tre ore. Lasciamoglielo credere.</p></article>
+      <article class="card reveal"><span class="num">04</span><span class="emo">🥾</span><h3>Debug in campo</h3><p>Quando il remoto non basta, arrivo con stivali, portatile e mascherina. Il laptop sopravvive. Le scarpe no.</p></article>
+      <article class="card reveal"><span class="num">05</span><span class="emo">🎄</span><h3>Assistenza H24</h3><p>Natale, Pasqua, Ferragosto, matrimonio di mia cugina. I batteri non fanno festa, quindi neanche io.</p></article>
+      <article class="card cta reveal"><span class="num">06</span><span class="emo">📞</span><h3>Il tuo impianto puzza di bug?</h3><p>Lo sistemo. Il bug, non la puzza: quella è una feature.</p><a class="btn btn-primary" href="#contatti">Scrivimi</a></article>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2>Dalla stalla al codice</h2>
+        <p>La filiera corta più corta che c'è: la mucca produce, il digestore digerisce, il mio software comanda, la rete elettrica ringrazia.</p>
+      </div>
+      <ul class="ticks">
+        <li>Programmi che girano anche a −10 °C in un quadro pieno di ragni</li>
+        <li>Allarmi via SMS, con priorità: "urgente", "molto urgente", "ti sto chiamando"</li>
+        <li>Documentazione consegnata (prima o poi)</li>
+        <li>Backup su tre chiavette USB, una delle quali si trova</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="terminal" role="img" aria-label="Terminale finto che mostra lo stato dell'impianto">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <pre id="term"></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="meter reveal">
+      <small>METANOMETRO LIVE · prodotto dagli impianti MiToSoft da quando hai aperto questa pagina</small>
+      <div class="val"><span id="gas">0,000</span> m³</div>
+      <small>Dati assolutamente inventati ma con grande convinzione.</small>
+      <div class="stats">
+        <div class="stat"><b id="cnt-years">20+</b><span>anni di onorata carriera</span></div>
+        <div class="stat"><b>∞</b><span>chiamate "tanto è un attimo"</span></div>
+        <div class="stat"><b>1</b><span>paio di stivali sopravvissuto</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Il metodo MiToSoft™</h2>
+      <p>Quattro passi collaudati in oltre vent'anni di onorata carriera e qualche migliaio di caffè.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Mi chiami</h3><p>Di solito il venerdì alle 18:45. È sempre così.</p></div>
+      <div class="step reveal"><h3>Arrivo</h3><p>Con calma, ma arrivo. Navigatore che dice "strada sterrata per 4 km".</p></div>
+      <div class="step reveal"><h3>Annuso l'impianto</h3><p>Dopo 20 anni capisco il problema dall'odore. Davvero. Non chiedetemi come.</p></div>
+      <div class="step reveal"><h3>Funziona</h3><p>L'impianto riparte, il cliente sorride, la fattura parte. Lei sì, a 120 giorni.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="recensioni">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Cosa pensano di me</h2>
+      <p>Recensioni vere, da aziende vere, rese anonime per evitare querele. Le mie, non le loro.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote reveal" style="--r:-1.5deg">
+        <blockquote>È così bravo che mi ruba tutti i clienti.</blockquote>
+        <div class="stars">★★★★★</div>
+        <figcaption class="who"><span class="av">🕶️</span><span><b>Azienda Anonima S.r.l.</b><br>Concorrente, visibilmente nervoso</span></figcaption>
+      </figure>
+      <figure class="quote reveal" style="--r:1deg">
+        <blockquote>Un terrone così onesto è difficile da trovare in giro.</blockquote>
+        <div class="stars">★★★★★</div>
+        <figcaption class="who"><span class="av">🕶️</span><span><b>Azienda Anonima S.p.A.</b><br>Cliente del Nord, piacevolmente sorpreso</span></figcaption>
+      </figure>
+      <figure class="quote reveal" style="--r:-.8deg">
+        <blockquote>Bravissimimo, ma prendi un po' di sole ogni tanto.</blockquote>
+        <div class="stars">★★★★☆</div>
+        <figcaption class="who"><span class="av">🕶️</span><span><b>Azienda Anonima & Figli</b><br>Preoccupata per la mia vitamina D</span></figcaption>
+      </figure>
+    </div>
+    <p class="disclaimer">La stellina mancante è per il pallore. Ci sto lavorando (no).</p>
+  </div>
+</section>
+
+<section id="certificazioni">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Certificazioni e titoli</h2>
+      <p>Appesi in ufficio, accanto al calendario delle mucche del 2009.</p>
+    </div>
+    <div class="tags reveal">
+      <span class="tag">ISO 9001 (a memoria)</span>
+      <span class="tag">Patente per il trattore (quasi)</span>
+      <span class="tag">Esperto in "ma ieri funzionava"</span>
+      <span class="tag">Master in Ladder Logic</span>
+      <span class="tag">Esperto in olfatto industriale</span>
+      <span class="tag">Sopravvissuto a 3 riforme del forfettario</span>
+      <span class="tag">Certificato anti-pioggia nei quadri</span>
+      <span class="tag">Amico personale di 4.000 mucche</span>
+    </div>
+  </div>
+</section>
+
+<section id="contatti" style="padding-top:0">
+  <div class="final reveal">
+    <h2>Rendiamo il mondo più pulito. Insieme.</h2>
+    <p>Hai un impianto di biogas, un PLC che fa i capricci o semplicemente voglia di parlare di metano? Scrivimi. Rispondo, giuro. Magari dalla stalla.</p>
+    <button class="btn" id="contactBtn" type="button">📞 Contatta MiToSoft</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#top"><span class="logo-mark">🐄</span><span>MiTo<b>Soft</b></span></a>
+        <p style="margin-top:12px">Un mondo più pulito. Puliamo il mondo da oltre 20 anni.</p>
+      </div>
+      <div>
+        <h4>Dove</h4>
+        <p>Ovunque ci sia un digestore</p>
+        <p>e un bar aperto alle 6</p>
+      </div>
+      <div>
+        <h4>Orari</h4>
+        <p>Lun–Dom: sempre</p>
+        <p>Ferie: leggenda metropolitana</p>
+      </div>
+    </div>
+    <p class="legal">© <span id="year"></span> MiToSoft · P.IVA dolorosamente attiva · Nessuna mucca è stata maltrattata nella realizzazione di questo sito.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var $ = function(s){return document.querySelector(s)};
+  $('#year').textContent = new Date().getFullYear();
+
+  // menu mobile
+  var mb = $('.menu-btn'), ul = $('nav ul');
+  mb.addEventListener('click', function(){ var o = ul.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
+  ul.addEventListener('click', function(e){ if(e.target.tagName==='A'){ ul.classList.remove('open'); mb.setAttribute('aria-expanded', false);} });
+
+  // toast
+  var t, toast = $('#toast');
+  function say(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(t); t = setTimeout(function(){toast.classList.remove('show')}, 2600); }
+
+  function floaty(x, y, emo){
+    var s = document.createElement('span'); s.className='floaty'; s.textContent=emo;
+    s.style.left = (x-14)+'px'; s.style.top = (y-14)+'px';
+    document.body.appendChild(s); setTimeout(function(){s.remove()}, 1500);
+  }
+
+  // mucca
+  var moos = ['Muuu!','Muuu… dove sono i miei cavalli vapore?','Io faccio la mia parte 💩','MiToSoft è il mio idolo','Muuu-ltitasking!','Ho prodotto 3 kWh oggi, e tu?'];
+  var cowClicks = 0, speech = $('#speech');
+  $('#cow').addEventListener('click', function(e){
+    cowClicks++;
+    speech.textContent = moos[Math.floor(Math.random()*moos.length)];
+    speech.classList.add('show'); setTimeout(function(){speech.classList.remove('show')}, 1800);
+    ['💩','⚡','💨'].forEach(function(em,i){ setTimeout(function(){ floaty(e.clientX + (i-1)*30, e.clientY, em); }, i*120); });
+    if(cowClicks === 10) say('🏅 Hai munto 10 volte la mucca. Assunto come stagista (non retribuito).');
+  });
+
+  // terminale
+  var lines = [
+    '$ mitosoft --status impianto_42',
+    '> Connessione al PLC... OK',
+    '> Digestore 1: 38.4 °C ✔',
+    '> Agitatore: gira (meno male)',
+    '> CH4: 54% ✔',
+    '> Cogeneratore: 999 kW ✔',
+    '> Odore: intenso ✔ (normale)',
+    '> Cliente: soddisfatto?',
+    '  ...',
+    '  ...',
+    '> Cliente: ha chiamato 4 volte',
+    '$ sudo prendi-ferie',
+    '> ERRORE: permesso negato dalla partita IVA',
+    '$ _'
+  ];
+  var term = $('#term'), li = 0, ci = 0, started = false;
+  function type(){
+    if(li >= lines.length){ setTimeout(function(){ term.textContent=''; li=0; ci=0; type(); }, 4000); return; }
+    var l = lines[li];
+    if(ci <= l.length){ term.textContent = term.textContent.replace(/[^\n]*$/, l.slice(0,ci)); ci++; setTimeout(type, l[0]==='$'?45:18); }
+    else { term.textContent += '\n'; li++; ci=0; setTimeout(type, 260); }
+  }
+
+  // metanometro
+  var gas = 0, gasEl = $('#gas');
+  setInterval(function(){ gas += Math.random()*0.35; gasEl.textContent = gas.toLocaleString('it-IT',{minimumFractionDigits:3,maximumFractionDigits:3}); }, 120);
+
+  // reveal
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);
+      if(!started && en.target.querySelector && en.target.querySelector('#term')){ started = true; type(); } } });
+  },{threshold:.15}) : null;
+  document.querySelectorAll('.reveal').forEach(function(el){ io ? io.observe(el) : el.classList.add('in'); });
+  if(!io){ started = true; type(); }
+
+  // contatto
+  var replies = ['📵 Squilla... è in un digestore, niente campo. Riprova!','🐄 Ha risposto una mucca. Ha detto "muuu". Lo prendiamo come un sì.','☎️ Occupato: sta spiegando a un cliente che "il PLC non si è rotto da solo".','✅ Messaggio ricevuto! Risposta prevista entro 20 anni (come l\'esperienza).'];
+  var ri = 0;
+  $('#contactBtn').addEventListener('click', function(e){ say(replies[ri++ % replies.length]); floaty(e.clientX, e.clientY, '📞'); });
+})();
+</script>
+</body>
+</html>
